@@ -1,0 +1,85 @@
+%! TEX root = main.tex
+
+\begin{frame}\frametitle{Prerequisites 1}
+We need a theorem.
+\begin{exampleblock}{Cauchy's Theorem \#3971}
+  If \(f(z) = \sum_{n \geq 0} f_n z^n\), then
+\[
+  f_n = \frac{1}{2\pi i} \oint_{\mathcal{C}} f(z) z^{-n - 1} \, \mathrm{d}z
+\]
+Where \(\mathcal{C}\) is a counterclockwise contour around the origin.
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}\frametitle{Prerequisites 2}
+We need a method.
+\begin{exampleblock}{Generating Functions}
+  Let \(A, B \subset \mathbb{N}\) be (multi-)sets, and \(A + B \coloneqq \left\{a + b : a \in A, b \in B\right\}\) be their sum-set. Define the indicator generating function \(f_a(x) \coloneqq \sum_{a \in A} x^a\) and \(f_b(x) \coloneqq \sum_{b \in B} x^b\). Then,
+
+\[
+  f_a(x)f_b(x) = \sum_{t \in A + B} c_t x^t
+\]
+
+Where \(c_t\) is the number of ways that \(t\) can be represented as \(a + b\), where \(a \in A\) and \(b \in B\). We write \([x^t]\left(f_a(x)f_b(x)\right)\) to indicate the coefficient of \(x^t\) in \(f_a(x)f_b(x)\).
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection}
+To motivate, let we recall two classical theorems.
+
+\begin{exampleblock}{Sum of Four Squares Theorem}
+  All nonnegative integers \(n\) can be written as sum of at most four squares. In fact, if we denote by \(r_4(n)\) the number of ways to write \(n\) as sum of four squares, then
+\[
+  r_4(n) = 8\sum_{\substack{m \mid n \\ 4 \nmid m}} m
+\]
+\end{exampleblock}
+
+\begin{exampleblock}{Sum of Two Squares Theorem}
+  A positive integer \(n > 1\) can be written as sum of two squares if and only if its prime factorisation does not contain any \(p^e\) where \(p \equiv 1 \pmod{4}\) and \(e\) is odd. The value \(r_2(n)\) relates to the factorisation in \(\mathbb{Z}[i]\).
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection}
+As the prerequisites slides suggested, we can tackle these two problems by the method of generating function.
+\pause \\[5px]
+
+For example, the value \(r_4(n)\) can be computed as \([x^n]\left(\theta^4(x)\right)\), where
+\[
+  \theta(x) \coloneqq \sum_{m \in \mathbb{Z}} x^{m^2} = 1 + 2x + 2x^4 + 2x^9 + \cdots
+\]
+\pause \\[5px]
+
+This begs for modular forms, but we will see now that it doesn't help.
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection}
+Instead, let's consider the problem in its full generality.
+
+\begin{block}{Sum of \(s\) \(k^{\text{th}}\) Powers}
+  Given integer \(N\) and positive integers \(k\) and \(s\), determine the number of solutions \((x_1, \cdots, x_s) \in \mathbb{N}^s\)\footnotemark to the equation
+\[
+  x_1^k + \cdots + x_s^k = N
+\]
+\end{block}
+We denote the quantity above by \(r_{k, s}(N)\).
+\footnote[frame]{We only consider nonnegative integer solutions, as the rest can be obtained by symmetry.}
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection}
+Just like before, we can directly write down \(r_{k, s}(N) = [z^N]f^s(z)\), where
+\[
+  f(z) \coloneqq \sum_{n = 0}^{\infty} z^{n^k}
+\]
+\pause
+
+Applying Cauchy's Theorem gives
+\[
+  r_{k, s}(N) = \frac{1}{2\pi i}\oint_{\mathcal{C}} f^s(z)z^{-N - 1} \, \mathrm{d}z
+\]
+\pause
+
+Let's use a short hand \(e(t)\) for \(\exp(2\pi it)\). We can parametrise the unit circle \(\mathcal{C}\) by \(z = e(t)\) with \(t \in [0, 1]\). Then, \(\mathrm{d}z = 2\pi ie(t)\mathrm{d}t\), giving
+\[
+  r_{k, s}(N) = \int_0^1 f^s(e(t))e(t)^{-N - 1} \cdot e(t)\mathrm{d}t = \int_0^1 \left(\sum_{n = 0}^{{\color{red} \lfloor N^{1 / s} \rfloor}} e\left(tn^k\right)\right)^s e(-Nt)\mathrm{d}t
+\]
+\end{frame}

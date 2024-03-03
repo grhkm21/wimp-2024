@@ -1,0 +1,39 @@
+\documentclass{beamer}
+\mode<presentation> { \setbeamercovered{transparent} }
+
+\usetheme{Boadilla}
+
+\usepackage{hyperref}
+\hypersetup{colorlinks=false, citecolor=green}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{citations.bib}
+
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{shapes,backgrounds}
+\usepackage{subfiles}
+
+\title{Yet Another Talk about Prime Numbers}
+\subtitle{And my first experience with Beamer}
+\author{Gareth Ma}
+\institute{University of Warwick}
+\date{March 2, 2024}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\vskip-0.5cm
+\centering Warwick Imperial Mathematics Ponference (WIMP)
+\vskip0.5cm
+\end{frame}
+
+\subfile{intro}
+\subfile{motivation}
+\subfile{sieve}
+\subfile{questions}
+\subfile{circle}
+\subfile{questions}
+
+\end{document}

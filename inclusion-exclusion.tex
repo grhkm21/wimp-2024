@@ -1,0 +1,161 @@
+%! TEX root = main.tex
+
+\subsection{Formulation}
+\begin{frame}\frametitle{\insertsubsection}
+The Eratosthenes sieve is a very efficient method of \textit{sieving} primes, especially when performed by a computer. How do we phrase it mathematically?
+\pause
+
+Let us setup some notations:
+\begin{itemize}
+  \item We fix \(N\).
+  \item Write \(\mathcal{P} \coloneqq \{2, 3, 5, 7, \cdots\}\) for the primes.
+  \item Write \(\mathcal{A} \coloneqq \{2, 3, 4, \cdots, N - 1, N\}\).
+  \item Write \(\mathcal{S}_d \coloneqq \left\{d, 2d, \cdots, \lfloor\frac{N}{d}\rfloor d\right\}\) for the multiples of \(d\) not exceeding \(N\).
+\end{itemize}
+
+We include \(d\) in \(\mathcal{S}_d\) to ease computation.
+\pause
+
+The \textit{sieving} operation we performed can be expressed as the set
+\[
+  \left\{ p \in \mathcal{P} : \lfloor\sqrt{N}\rfloor < p \leq N \right\}
+    = \mathcal{A} \setminus \bigcup_{d = 2}^{\lfloor\sqrt{N}\rfloor} \mathcal{S}_d
+\]
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection}
+Notations:
+\begin{itemize}
+  \item We fix \(N\).
+  \item Write \(\mathcal{P} \coloneqq \{2, 3, 5, 7, \cdots\}\) for the primes.
+  \item Write \(\mathcal{A} \coloneqq \{2, 3, 4, \cdots, N - 1, N\}\).
+  \item Write \(\mathcal{S}_d \coloneqq \left\{d, 2d, \cdots, \lfloor\frac{N}{d}\rfloor d\right\}\) for the multiples of \(d\) not exceeding \(N\).
+\end{itemize}
+
+The \textit{sieving} operation we performed can be expressed as the set
+\[
+  \left|\left\{ p \in \mathcal{P} : \lfloor\sqrt{N}\rfloor < p \leq N \right\}\right|
+    = \left|\mathcal{A} \setminus \bigcup_{d = 2}^{\lfloor\sqrt{N}\rfloor} \mathcal{S}_d\right|
+\]
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection}
+Notations:
+\begin{itemize}
+  \item We fix \(N\).
+  \item Write \(\mathcal{P} \coloneqq \{2, 3, 5, 7, \cdots\}\) for the primes.
+  \item Write \(\mathcal{A} \coloneqq \{2, 3, 4, \cdots, N - 1, N\}\).
+  \item Write \(\mathcal{S}_d \coloneqq \left\{d, 2d, \cdots, \lfloor\frac{N}{d}\rfloor d\right\}\) for the multiples of \(d\) not exceeding \(N\).
+  \item Write {\color{blue} \(\pi(x) \coloneqq \left|\mathcal{P} \cap \mathcal{A}\right|\)} for the number of primes not exceeding \(N\).
+\end{itemize}
+
+The \textit{sieving} operation we performed can be expressed as the set
+\[
+  \left|\left\{ p \in \mathcal{P} : \lfloor\sqrt{N}\rfloor < p \leq N \right\}\right|
+    = \left|\mathcal{A} \setminus \bigcup_{d = 2}^{\lfloor\sqrt{N}\rfloor} \mathcal{S}_d\right|
+\]
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection}
+Notations:
+\begin{itemize}
+  \item We fix \(N\).
+  \item Write \(\mathcal{P} \coloneqq \{2, 3, 5, 7, \cdots\}\) for the primes.
+  \item Write \(\mathcal{A} \coloneqq \{2, 3, 4, \cdots, N - 1, N\}\).
+  \item Write \(\mathcal{S}_d \coloneqq \left\{d, 2d, \cdots, \lfloor\frac{N}{d}\rfloor d\right\}\) for the multiples of \(d\) not exceeding \(N\).
+  \item Write \(\pi(x) \coloneqq \left|\mathcal{P} \cap \mathcal{A}\right|\) for the number of primes not exceeding \(N\).
+\end{itemize}
+
+The \textit{sieving} operation we performed can be expressed as the set
+\[
+  {\color{blue} \pi(N) - \pi(\lfloor\sqrt{N}\rfloor)}
+  = |\mathcal{A}| - \left|\bigcup_{d = 2}^{\lfloor\sqrt{N}\rfloor} \mathcal{S}_d\right|
+\]
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection}
+Notations:
+\begin{itemize}
+  \item We fix \(N\).
+  \item Write \(\mathcal{P} \coloneqq \{2, 3, 5, 7, \cdots\}\) for the primes.
+  \item Write \(\mathcal{A} \coloneqq \{2, 3, 4, \cdots, N - 1, N\}\).
+  \item Write \(\mathcal{S}_d \coloneqq \left\{d, 2d, \cdots, \lfloor\frac{N}{d}\rfloor d\right\}\) for the multiples of \(d\) not exceeding \(N\).
+  \item Write \(\pi(x) \coloneqq \left|\mathcal{P} \cap \mathcal{A}\right|\) for the number of primes not exceeding \(N\).
+  \item Write {\color{blue} \(\mathcal{P}' \coloneqq \mathcal{P} \cap [2, \lfloor\sqrt{N}\rfloor]\)} for the primes not exceeding \(\lfloor\sqrt{N}\rfloor\).
+\end{itemize}
+
+The \textit{sieving} operation we performed can be expressed as the set
+\[
+  \pi(N) - \pi(\lfloor\sqrt{N}\rfloor) = |\mathcal{A}| - \left|\bigcup_{d \in \mathcal{P}'} \mathcal{S}_d\right|
+\]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Inclusion-Exclusion}
+\begin{frame}\frametitle{\insertsubsection \, 1}
+Before we can continue, let us recall some set theory! \textit{faints}
+\pause
+
+Recall the inclusion-exclusion principle:
+\begin{align*}
+  \left|\bigcup_{i = 1}^m A_i\right|
+  &= \sum_{1 \leq i \leq m} |A_i| - \sum_{1 \leq i < j \leq m} |A_i \cap A_j| \\
+  &\quad+ \sum_{1 \leq i < j < k \leq m} |A_i \cap A_j \cap A_k| - \cdots \\
+  &\quad+ (-1)^m |A_1 \cap \cdots \cap A_m|
+\end{align*}
+\pause
+
+In full generality, we have
+\begin{block}{Set Theoretic Inclusion-Exclusion}
+\[
+  \left|\bigcup_{i = 1}^m A_i\right| = \sum_{\mathcal{I} \subset [m]} (-1)^{|\mathcal{I}| + 1} \left|\bigcap_{i \in \mathcal{I}} A_i\right|
+\]
+\end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}\frametitle{\insertsubsection \, 2}
+\[
+  \left|\bigcup_{d = 2}^{\lfloor\sqrt{N}\rfloor} \mathcal{S}_d\right|
+  = |\mathcal{S}_2| + |\mathcal{S}_3| + |\mathcal{S}_5| - |\mathcal{S}_6| + |\mathcal{S}_7| - |\mathcal{S}_{10}| + |\mathcal{S}_{11}| + \cdots
+\]
+
+\[
+  |\mathcal{A}| - \left|\bigcup_{d = 2}^{\lfloor\sqrt{N}\rfloor} \mathcal{S}_d\right|
+  = |\mathcal{S}_1| - |\mathcal{S}_2| - |\mathcal{S}_3| - |\mathcal{S}_5| + |\mathcal{S}_6| - |\mathcal{S}_7| + |\mathcal{S}_{10}| - |\mathcal{S}_{11}| + \cdots
+\]
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection \, 2}
+\[
+  |\mathcal{A}| - \left|\bigcup_{d = 2}^{\lfloor\sqrt{N}\rfloor} \mathcal{S}_d\right|
+  = |\mathcal{S}_1| - |\mathcal{S}_2| - |\mathcal{S}_3| - |\mathcal{S}_5| + |\mathcal{S}_6| - |\mathcal{S}_7| + |\mathcal{S}_{10}| - |\mathcal{S}_{11}| + \cdots
+\]
+
+The coefficient in front of each \(\mathcal{S}_d\) can be determined explicitly: it is \(0\) if \(d\) is divisible by a square (i.e. not \textit{squarefree}), \(1\) if \(d\) has even number of prime divisors, and \(-1\) otherwise. This is the \textbf{Möbius} function, denoted \(\mu(d)\):
+
+\[
+  \mu(d) = \begin{cases}
+    1 &\text{if} \, d = p_1p_2\cdots p_{2n}, p_1 < p_2 < \cdots < p_{2n} \\
+    -1 &\text{if} \, d = p_1p_2\cdots p_{2n + 1}, p_1 < p_2 < \cdots < p_{2n + 1} \\
+    0 &\text{otherwise}
+  \end{cases}
+\]
+
+An important property we need later is that if \(m, n\) are coprime, then \(\mu(m)\mu(n) = \mu(mn)\).
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection}
+
+Recall that \(\mathcal{S}_d\) consists of the multiples of \(d\) not exceeding \(N\), so \(|\mathcal{S}_d| = \lfloor\frac{N}{d}\rfloor\).
+
+Also, \(\mathcal{S}_d\) appears in the sum if and only if the prime factors of \(d\) is a subset of \(\mathcal{P}'\). If we let \(\mathscr{P} \coloneqq \prod_{p \in \mathcal{P}'} p\), then we want \(d \mid \mathscr{P}\). Therefore, we can write the expression compactly:
+
+\begin{block}{Number Theoretic Inclusion-Exclusion}
+\[
+  |\mathcal{A}| - \left|\bigcup_{d = 2}^{\lfloor\sqrt{N}\rfloor} \mathcal{S}_d\right| = \sum_{d \mid \mathscr{P}} \mu(d)|\mathcal{S}_d| = \sum_{d \mid \mathscr{P}} \mu(d)\lfloor\frac{N}{d}\rfloor
+\]
+\end{block}
+\end{frame}

@@ -1,0 +1,94 @@
+%! TEX root = main.tex
+
+\begin{frame}\frametitle{\insertsubsection}
+Going back to the very beginning, we wrote
+\begin{align*}
+  \pi(N) - \pi(\lfloor\sqrt{N}\rfloor)
+  &= |\mathcal{A}| - \left|\bigcup_{d \in \mathcal{P}'} \mathcal{S}_d\right| \\
+  &= \sum_{d \mid \mathscr{P}} \mu(d) \lfloor\frac{N}{d}\rfloor \\
+  \pause
+  &= \sum_{d \mid \mathscr{P}} \mu(d) \left(\frac{N}{d} + O(1)\right) \\
+  &= \underbrace{N \sum_{d \mid \mathscr{P}} \frac{\mu(d)}{d}}_{\text{main term}} + \underbrace{\sum_{d \mid \mathscr{P}} \mu(d) O(1)}_{\text{error term}}
+\end{align*}
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection (Error)}
+\begin{align*}
+  \pi(N) - \pi(\lfloor\sqrt{N}\rfloor)
+  &= \overbrace{N \sum_{d \mid \mathscr{P}} \frac{\mu(d)}{d}}^{\text{main term}} + {\color{blue} \overbrace{\sum_{d \mid \mathscr{P}} \mu(d) O(1)}^{\text{error term}}} \\
+  &= N \sum_{d \mid \mathscr{P}} \frac{\mu(d)}{d} + {\color{blue} O\left(\sum_{d \mid \mathscr{P}} 1\right)} \\
+  &= N \sum_{d \mid \mathscr{P}} \frac{\mu(d)}{d} + {\color{blue} O\left(2^{|\mathcal{P}'|}\right)} \\
+  &= N \sum_{d \mid \mathscr{P}} \frac{\mu(d)}{d} + {\color{blue} O\left(2^{\pi(\lfloor\sqrt{N}\rfloor)}\right)} \\
+  \break
+  &= N \sum_{d \mid \mathscr{P}} \frac{\mu(d)}{d} + {\color{blue} O\left(2^{\sqrt{N}}\right)} \\
+\end{align*}
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection (Main)}
+\begin{align*}
+  \pi(N) - \pi(\lfloor\sqrt{N}\rfloor)
+  &= N {\color{blue} \sum_{d \mid \mathscr{P}} \frac{\mu(d)}{d}} + O\left(2^{\sqrt{N}}\right) \\
+  &= N {\color{blue} \prod_{p \leq \lfloor\sqrt{N}\rfloor} \left(\frac{\mu(1)}{1} + \frac{\mu(p)}{p}\right)} + O\left(2^{\sqrt{N}}\right)
+\end{align*}
+
+This is an example of an \textit{Euler product}. For a simpler example, consider the equality
+
+\[
+  (1 + f(m))(1 + f(n)) = 1 + f(m) + f(n) + f(mn) = \sum_{d \mid mn} f(d)
+\]
+
+When \(f\) is a multiplicative function.
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection (Main)}
+\begin{align*}
+  \pi(N) - \pi(\lfloor\sqrt{N}\rfloor)
+  &= N {\color{blue} \sum_{d \mid \mathscr{P}} \frac{\mu(d)}{d}} + O\left(2^{\sqrt{N}}\right) \\
+  &= N {\color{blue} \prod_{p \leq \lfloor\sqrt{N}\rfloor} \left(\frac{\mu(1)}{1} + \frac{\mu(p)}{p}\right)} + O\left(2^{\sqrt{N}}\right) \\
+  &= N {\color{blue} \prod_{p \leq \lfloor\sqrt{N}\rfloor} \left(1 - \frac{1}{p}\right)} + O\left(2^{\sqrt{N}}\right) \\
+  &< {\color{blue} \frac{N}{\log N}} + O\left(2^{\sqrt{N}}\right)
+\end{align*}
+
+Where the last line follows from either Merten's bound or through
+
+\[
+  \prod_{p \leq \lfloor\sqrt{N}\rfloor} \left(1 - \frac{1}{p}\right)^{-1} = \prod_{p \leq \lfloor\sqrt{N}\rfloor} \sum_{r = 0}^{\infty} p^{-r} \geq \sum_{n \leq \lfloor\sqrt{N}\rfloor} n^{-1} > \log\left(\lfloor\sqrt{N}\rfloor\right)
+\]
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection (Main)}
+
+\begin{align*}
+  \pi(N) - \pi(\lfloor\sqrt{N}\rfloor)
+  < \frac{N}{\log N} + O\left(2^{\sqrt{N}}\right)
+\end{align*}
+
+\begin{alertblock}{Problem}
+  Error term is larger than the main term.
+\end{alertblock}
+
+\begin{exampleblock}{Solution}
+  Redo the computations with a smaller \textit{sieving parameter}, i.e. replace \(\lfloor\sqrt{N}\rfloor\) with some carefully chosen \(z\).
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection (Speedrun ver.)}
+
+  Writing \(\mathscr{P}_z \coloneqq \prod_{p \in \mathcal{P} \mid [2, z]} p\),
+
+\begin{align*}
+  \pi(N) - \pi(z)
+  &= \sum_{d \mid \mathscr{P}_z} \mu(d) \lfloor\frac{N}{d}\rfloor \\
+  &= N\prod_{p \leq z} \left(1 - \frac{1}{p}\right) + O(2^{\pi(z)}) \\
+  &< \frac{N}{\log z} + O(2^z)
+\end{align*}
+
+Taking \(z = \log N\) and noting that \(2^z = N^{\log 2} = O\left(\frac{N}{\log \log N}\right)\), we get
+
+\begin{exampleblock}{Estimation of \(\pi(N)\)}
+\[
+  \pi(N) = O\left(\frac{N}{\log \log N}\right)
+\]
+\end{exampleblock}
+
+\end{frame}

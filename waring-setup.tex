@@ -1,0 +1,65 @@
+%! TEX root = main.tex
+
+\subsection{Algebraic Manipulation}
+\begin{frame}\frametitle{\insertsubsection}
+Let us look closer at the \textit{exponential sum}
+\[
+  g(t) = \sum_{n = 0}^{\infty} e(tn^k), t \in [0, 1]
+\]
+
+Suppose that \(t\) is (close to) a rational number \(t = a / q\). Then,
+\[
+  g(t) = \sum_{n = 0}^{\lfloor N^{1 / s} \rfloor} e\left(\frac{an^k}{q}\right)
+  = \sum_{n = 0}^{\lfloor N^{1 / s} \rfloor} e\left(\frac{an^k\,(\mathrm{mod}\,q)}{q}\right)
+\]
+\pause
+
+The numerator is not uniform at all! For example, if \(k = 2\), then \(n^2 \pmod{q}\) only takes values on half of \(\{0, 1, \cdots, q - 1\}\).
+\pause
+This is especially significant when \(q\) is small, where the sum might have large values compared to when \(q\) is large. This motivates us to split the previous integral into when \(q\) is small, and the rest.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Defining Arcs}
+\begin{frame}\frametitle{\insertsubsection}
+Our definitions depends on a constant \(P = N^{\upsilon}\) that is optimised later.
+\begin{block}{Major \& Minor Arcs}
+  For every natural number with \(1 \leq a < q \leq P\), define the \textit{major arc} around \(a / q\) to be
+\[
+  \mathfrak{M}(q, a) \coloneqq \left\{\alpha \in \mathbb{R} : \left|\alpha - \frac{a}{q}\right| \leq PN^{-k}\right\}
+\]
+  The major arcs are then defined as \(\mathfrak{M} = \bigcup_{q \leq P} \bigcup_{\substack{a = 1 \\ (a, q) = 1}}^q \mathfrak{M}(q, a)\), and the minor arcs are defined as
+\[
+  \mathfrak{m} = [0, 1] \setminus \mathfrak{M} \footnotemark
+\]
+\end{block}
+\footnote{In actual computation, we shift the interval to \((PN^{-k}, 1 + PN^{-k})\) instead.}
+\end{frame}
+
+\begin{frame}
+Now, our original integral is transformed into the sum of two:
+\[
+  r_{k, s}(N) = \int_{\mathfrak{M}} g^s(t)e(-Nt)\mathrm{d}t + \int_{\mathfrak{m}} g^s(t)e(-Nt)\mathrm{d}t
+\]
+\pause
+
+Using various techniques, one can prove the following two bounds
+\begin{exampleblock}{Major arc estimate}
+	For all sufficiently large \(N\) and \(s \geq 2^k + 1\),
+\[
+  \int_{\mathfrak{M}} f(\alpha)^s e(-\alpha N)\, \mathrm{d}\alpha \gg N^{s / k - 1}
+\]
+\end{exampleblock}
+
+\noindent
+and
+
+% Minor arcs
+\begin{exampleblock}{Minor arc estimate}
+	For all sufficiently large \(N\) and \(s \geq 2^k + 1\),
+\[
+  \int_{\mathfrak{m}} f(\alpha)^s e(-\alpha N)\, \mathrm{d}\alpha = o\left(N^{s / k - 1}\right)
+\]
+\end{exampleblock}
+\end{frame}

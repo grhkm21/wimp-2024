@@ -1,0 +1,10 @@
+%! TEX root = main.tex
+
+\begin{frame}\frametitle{\insertsubsection}
+Before we finish off, here are a few key remarks:
+\begin{itemize}
+  \item If you know the Prime Number Theorem, you know that the previous bound is asymptotically incorrect. Indeed, we know that \(\pi(N) \sim \frac{N}{\log N}\).
+  \item Instead, the correct bound can be proven with \textit{Brun's Sieve}, which reduces the error term \(O(2^z)\) by truncating the sum \(\sum_{d \mid \mathscr{P}_z}\).
+  \item Also, sieve theory is \textit{much} more general than what I demonstrated. For example, one can tackle the twin prime conjecture by replacing the sieving sets \(\mathcal{S}_d = d\mathbb{N}\) with \(\mathcal{S}_p \coloneqq \left\{n : p \mid n(n + 2)\right\}\). (Why?)
+\end{itemize}
+\end{frame}
