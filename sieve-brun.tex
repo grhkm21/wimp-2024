@@ -1,0 +1,54 @@
+%! TEX root = main.tex
+
+\subsection{Further Improvements}
+\begin{frame}\frametitle{Why is the result wrong?}
+Some of you may know about the Prime Number Theorem, which states that \(\pi(N) \sim \frac{N}{\log N}\), meaning our derived asymptotic is not tight.
+\pause \\[5px]
+
+The reason lies in the unpredictable behaviour of \(\mu(d)\). Indeed, there are several results on the ``pseudorandomness'' of \(\mu(d)\) ~\cite{GreenTao12}. Even its prefix sum \(\sum_{d = 1}^N \mu(d)\) isn't well understood for a long time.
+\pause \\[5px]
+
+Instead, Viggo Brun suggested replacing \(\mu(d)\) with better-behaved functions \(\lambda_d\) that allow us to control the error term better.
+\end{frame}
+
+\subsection{Brun's Pure Sieve}
+\begin{frame}\frametitle{\insertsubsection}
+Brun's idea is to \textit{truncate} the inclusion-exclusion process in order to reduce the number of terms.
+
+Let us write \(\omega(d)\) for the number of prime divisors of \(d\). We can group the terms in the number theoretic inclusion-exclusion by \(\omega(d)\), corresponding to the size of the subsets \(\mathcal{I}\), as follows.
+\[
+  \sum_{d \mid \mathscr{P}_z} \mu(d)\lfloor\frac{N}{d}\rfloor
+  = \sum_{k = 0}^{|\mathscr{P}_z|} \sum_{\substack{d \mid \mathscr{P}_z \\ \omega(d) = k}} \mu(d)\lfloor\frac{N}{d}\rfloor
+  = \sum_{k = 0}^{|\mathscr{P}_z|} (-1)^k \sum_{\substack{d \mid \mathscr{P}_z \\ \omega(d) = k}} \lfloor\frac{N}{d}\rfloor
+\]
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection}
+Brun observes that if we truncate the sum to \(k \leq r\) for some threshold \(r\), this will actually provide a lowerbound and an upperbound, depending purely on the sign of \(r\)! This is not trivial but intuitively plausible. Instead of \(\pi(N) - \pi(z) = \sum_{d \mid \mathscr{P}_z} \mu(d)\lfloor\frac{N}{d}\rfloor\), we now have
+\[
+\begin{cases*}
+  \pi(N) - \pi(z) \geq \sum_{k = 0}^r \sum_{d \mid \mathscr{P}_z} \mu(d)\lfloor\frac{N}{d}\rfloor \quad\text{if} \, r \, \text{is odd} \\
+  \pi(N) - \pi(z) \leq \sum_{k = 0}^r \sum_{d \mid \mathscr{P}_z} \mu(d)\lfloor\frac{N}{d}\rfloor \quad\text{if} \, r \, \text{is even}
+\end{cases*}
+\]
+
+Less terms yields better control on the error term. In particular, you can get \(\pi(N) \sim O\left(\frac{N}{\log N}\right)\), asymptotically correct up to an unspecified constant.
+\pause
+
+Bonus: You can obtain a weakened Theorem (explained later):
+\[
+  \#\{n \leq N : \omega(n), \omega(n + 2) \leq 7\} \gg \frac{N}{\log^2 N}
+\]
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection}
+I will briefly mention some further optimisations.
+
+\begin{itemize}
+  \item (Brun) We replace \(\mu(d)\) with the truncated \(\mu_r(d)\).
+  \item (Brun?) We can replace \(\mu(d)\) with a weighted version \(\mu(d)g(d)\).
+  \item (Selberg \(\Lambda^2\)) We can replace \(\mu(d)\) with a sequence \(\lambda_d\), such that the \textbf{quadratic form} \(\sum_{d_1, d_2 \leq z} \frac{\lambda_{d_1} \lambda_{d_2}}{[d_1, d_2]}\) is minimised.
+  \item (Goldston, Pintz, Yildirim (GPY)) We can use special weights motivated by the Selberg weights.
+  \item (Maynard) We can use \textbf{multidimensional} sieves! James used this to improve the bound on gaps between primes.
+\end{itemize}
+\end{frame}

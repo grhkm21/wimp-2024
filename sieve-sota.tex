@@ -1,0 +1,51 @@
+%! TEX root = main.tex
+
+\begin{frame}\frametitle{\insertsubsection}
+Sieve theory is \textit{much} more general than what I demonstrated.
+\pause \\[5px]
+
+For example, one can tackle the twin prime conjecture by replacing the sieving sets \(\mathcal{S}_d = d\mathbb{N}\) with \(\mathcal{S}_p \coloneqq \left\{n : p \mid n(n + 2)\right\}\). Combined with the Brun's sieve, one gets the result mentioned before, where
+\begin{exampleblock}{Twin not-primes}
+\[
+  \#\{n \leq N : \omega(n), \omega(n + 2) \leq 7\} \gg \frac{N}{\log^2 N}
+\]
+\end{exampleblock}
+
+The constant \(7\) appears because using notation before, we set \(z > N^{1 / 8}\), meaning only prime divisors \(> z > N^{1 / 8}\) remains, of which there can only be \(7\) of.
+\pause \\[5px]
+
+Even though we don't know how to prove the twin prime conjecture, the more general question of ``bounded gaps between primes'', which asks ``what is the smallest prime gap that appears infinitely often'', has been tackled using the GPY and Maynard sieves.
+\end{frame}
+
+\begin{frame}\frametitle{\insertsubsection}
+Finally, let's talk about the Goldbach conjecture! Most progress on it comes in the form of ``\(m + n\) Theorems'':
+\begin{exampleblock}{\(m + n\) Theorem}
+  All even integers \(\geq 4\) can be written as the sum of an integer with at most \(m\) prime divisors, and another integer with at most \(n\) prime divisors.
+\end{exampleblock}
+\pause
+
+\begin{itemize}
+  \item Brun (1920): \(9 + 9\) Theorem
+  \item Buchstab: \(5 + 5\) Theorem
+  \item Buchstab, Selberg: \(4 + 4\) Theorem
+  \item Kuhn's weighted sieve: \(2 + 3\) Theorem
+  \item Using GRH: \(1 + 7\) Theorem
+  \item Chen JingRun (1966 in Chinese, 1973 in English): \(1 + 2\) Theorem
+\end{itemize}
+
+As usual, these mysterious numbers come from the choice of the sieving parameter \(z\): if we sieve away multiples of primes \(\leq (z \geq N^{1 / 10})\) from \(\mathcal{A}\), then the remaining numbers will all have prime divisors at least \(N^{1 / 10}\), meaning there can at most be \(9\) divisors. This is how Brun's result is achieved.
+\\
+
+Here are some citations so they show up in the next slide: ~\cite{CojocaruMurty05} ~\cite{Greaves01} ~\cite{Liu22} ~\cite{Maynard19} ~\cite{GPY05}
+\end{frame}
+
+\begin{frame}
+Chen JingRun's seminal paper's abstract:
+
+\centering
+``In this paper we shall prove that every sufficiently large even integer is a sum of a prime and a product of at most 2 primes. The method used is simple without any complicated numerical calculations.''
+\end{frame}
+
+\begin{frame}\frametitle{References}
+\printbibliography
+\end{frame}
